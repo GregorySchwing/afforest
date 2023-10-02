@@ -548,10 +548,12 @@ namespace {
     auto most_frequent = std::max_element(
       sample_counts.begin(), sample_counts.end(),
       [](const kvp_type& p1, const kvp_type& p2) { return p1.second < p2.second; });
+    /*
     std::cout
       << "Skipping largest intermediate component (ID: " << most_frequent->first
       << ", approx. " << static_cast<int>((static_cast<float>(most_frequent->second) / SAMPLE_SIZE) * 100)
       << "% of the graph)" << std::endl;
+    */
     return most_frequent->first;
   }
 
@@ -658,25 +660,4 @@ void BenchmarkConnectedComponents(CLApp& cli, const Graph& g)
 
   CUDA_CHECK(cudaFree(dev_comp));
   CUDA_CHECK(cudaFree(dev_samples));
-}
-
-int main(int argc, char* argv[]) {
-  CLApp cli(argc, argv, "GPU-connected-components");
-  if (!cli.ParseArgs())
-    return -1;
-  Builder b(cli);
-  Graph g = b.MakeGraph();
-  g.PrintStats();
-
-  BenchmarkConnectedComponents(cli, g);
-
-  // cudaDeviceReset must be called before exiting in order for profiling and
-  // tracing tools such as Nsight and Visual Profiler to show complete traces.
-  cudaError_t cudaStatus = cudaDeviceReset();
-  if (cudaStatus != cudaSuccess) {
-    fprintf(stderr, "cudaDeviceReset failed!");
-    return 1;
-  }
-
-  return 0;
 }

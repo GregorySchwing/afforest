@@ -44,10 +44,10 @@ foreach(KERNEL ${KERNELS_CUDA})
     add_executable(${KERNEL}_cuda device/${KERNEL}.cu)
     # Define the library target
     add_library(${KERNEL}_cuda_lib
-        device/${KERNEL}.cu
+        device/${KERNEL}_no_main.cu
     )
     target_include_directories(${KERNEL}_cuda PUBLIC src deps/cub)
-    target_include_directories(${KERNEL}_cuda_lib PUBLIC src deps/cub)
+    target_include_directories(${KERNEL}_cuda_lib PUBLIC src deps/cub device)
 
 endforeach()
 
