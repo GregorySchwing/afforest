@@ -26,6 +26,7 @@ Given filename, returns an edgelist or the entire graph (if serialized)
    directly into the returned graph instance
  - Otherwise, reads the file and returns an edgelist
 */
+using namespace afforest;
 
 
 template <typename NodeID_, typename DestID_ = NodeID_,

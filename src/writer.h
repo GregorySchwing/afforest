@@ -22,6 +22,7 @@ Given filename and graph, writes out the graph to storage
  - Should use WriteGraph(filename, serialized)
  - If serialized, will write out as serialized graph, otherwise, as edgelist
 */
+using namespace afforest;
 
 
 template <typename NodeID_, typename DestID_ = NodeID_>

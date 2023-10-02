@@ -32,7 +32,7 @@ Given arguements from the command line (cli), returns a built graph
  - edgelist can be from file (reader) or synthetically generated (generator)
  - Common case: BuilderBase typedef'd (w/ params) to be Builder (benchmark.h)
 */
-
+using namespace afforest;
 
 template <typename NodeID_, typename DestID_ = NodeID_,
           typename WeightT_ = NodeID_, bool invert = true>

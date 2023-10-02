@@ -84,6 +84,7 @@ typedef EdgePair<SGID> SGEdge;
 typedef int64_t SGOffset;
 
 
+namespace afforest { 
 
 template <class NodeID_, class DestID_ = NodeID_, bool MakeInverse = true>
 class CSRGraph {
@@ -291,4 +292,5 @@ class CSRGraph {
   DestID_*  in_neighbors_;
 };
 
+} // end namespace
 #endif  // GRAPH_H_

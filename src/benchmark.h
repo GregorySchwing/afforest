@@ -32,8 +32,8 @@ typedef int32_t NodeID;
 typedef int32_t WeightT;
 typedef NodeWeight<NodeID, WeightT> WNode;
 
-typedef CSRGraph<NodeID> Graph;
-typedef CSRGraph<NodeID, WNode> WGraph;
+typedef afforest::CSRGraph<NodeID> Graph;
+typedef afforest::CSRGraph<NodeID, WNode> WGraph;
 
 typedef BuilderBase<NodeID, NodeID, WeightT> Builder;
 typedef BuilderBase<NodeID, WNode, WeightT> WeightedBuilder;
