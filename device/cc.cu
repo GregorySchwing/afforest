@@ -591,6 +591,30 @@ namespace {
   }
 }
 
+
+void BenchmarkConnectedComponents_CSRThrust(NodeID nnodes,
+                                            NodeID nedges,
+                                            // nnodes*sizeof(NodeID) allocated on device
+                                            NodeID *dev_comp,
+                                            // SAMPLE_SIZE (1024)*sizeof(NodeID) allocated on device
+                                            NodeID *dev_samples,
+                                            // (nnodes + 1) * sizeof(OffsetID) allocated on device
+                                            OffsetID *row_start_,
+                                            // nedges * sizeof(NodeID_) allocated on device
+                                            NodeID* edge_dst_)
+{
+  CSRGraph<NodeID> g;
+  DevGraphAllocator dev_allocator(g);
+  dev_allocator.dev_g_.nnodes_=nnodes;
+  dev_allocator.dev_g_.nedges_=nedges;
+  dev_allocator.dev_g_.row_start_=row_start_;
+  dev_allocator.dev_g_.edge_dst_=edge_dst_;
+  DevGraph& dev_g = dev_allocator.dev_g_;
+  Afforest(g, dev_g, dev_comp, dev_samples);
+}
+
+
+
 void BenchmarkConnectedComponents(CLApp& cli, const Graph& g)
 {
   NodeID nnodes = g.num_nodes();
